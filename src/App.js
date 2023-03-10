@@ -2,6 +2,7 @@ import React from 'react';
 // ATENTIE! Nu uitati sa importati componentele create!
 import UserList from './components/UserList';
 import './App.css';
+import UserAddForm from './components/UserAddForm';
 
 class App extends React.Component {
   constructor() {
@@ -41,9 +42,24 @@ class App extends React.Component {
 
   changeColor(event) {
     this.setState({background: event.target.value});
+    console.log(this.state.background);
+  }
+
+  updateUsersList(user){
+    //Daca in parametrii lui SetState vedeti this.state => GRESIT
+    this.setState({users: [...this.state.users, user]});
+
+    //Daca setState primeste o functie ca parametru
+    //functia respectiva primeste ca parametru VALOAREA PRECEDENTA A STARII
+    this.setState((previousState) => {
+      return {
+        users: [...previousState.users, user]
+      }
+    });
   }
 
   render() {
+    console.log(this.state.background);
     // MOUNTNG: Cand componenta este montata, dupa constructor() este apelata metoda render
     // UPDATING: Cand componenta este actualizata, este apelata metoda render
     // Asadar, tineti minte: render este o metoda care face parte atat din ciclul de montare,
@@ -51,7 +67,10 @@ class App extends React.Component {
     console.log('App component rendered!');
     return(
       <div className="app" style={{background: this.state.background}}>
-        <h1>HELLO WORLD!</h1>
+        <h1>PROIECT 1</h1>
+
+      <UserAddForm updateUSersList={(user) => {this.updateUsersList(user)}}/>
+
         {/* De data asta, avand o lista de useri, ne vom crea comonenta UserList,
         careia ii vom pasa ca props informatiile din state-ul curent. */}
         {/* Am adaugat si o conditie suplimentara: lista de useri va fi afisata

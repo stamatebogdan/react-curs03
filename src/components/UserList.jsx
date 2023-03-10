@@ -29,6 +29,7 @@ class UserList extends React.Component{
         const { users } = this.props;
         return (
             <div>
+                <h2> LISTA UTILIZATORI: </h2>
                 {/* ATENTIE! Pe fiecare obiect din vectorul users vrem sa il afisam pe ecran! */}
                 {/* => fiecare obiect va fi transformat intr-un div(sau orice alt tag HTML/JSX). */}
                 {/* E foarte util sa intelegeti ca in React fiecare tag de HTML sau componenta JSX
